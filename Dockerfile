@@ -5,9 +5,10 @@ LABEL maintainer="Guillermo Gutiérrez <xiterrex@gmail.com>"
 ARG DEBIAN_FRONTEND=noninteractive
 ARG LANG=C
 ARG LC_ALL=C
+ARG TZ="Europe/Madrid"
 RUN apt-get -y update && \
     apt-get -y upgrade && \
-    apt-get install -y build-essential xsltproc inkscape wget curl unzip latexmk unar && \
+    apt-get -y install build-essential xsltproc inkscape wget curl unzip latexmk unar && \
     curl -L "https://github.com/hbin/top-programming-fonts/raw/master/install.sh" | /bin/bash && \
     wget "https://dl.dafont.com/dl/?f=apple_garamond" -O apple_garamond.zip && \
     unzip -o apple_garamond.zip -d ${HOME}/.fonts && \
@@ -20,4 +21,4 @@ RUN apt-get -y update && \
     rm -f GillSans.zip
 
 WORKDIR /project
-CMD ["latexmk"]
+ENTRYPOINT ["latexmk", "-pdfxe"]
