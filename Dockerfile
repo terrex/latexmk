@@ -18,7 +18,8 @@ RUN apt-get -y update && \
     rm -f tex-gyre-pagella.zip && \
     wget "https://www.freebestfonts.com/download?fn=3993" -O GillSans.zip && \
     unzip -o GillSans.zip -d ${HOME}/.fonts && \
-    rm -f GillSans.zip
+    rm -f GillSans.zip && \
+    rm -rf /var/lib/apt/lists/*
 
 WORKDIR /project
 ENTRYPOINT ["latexmk", "-pdfxe"]
